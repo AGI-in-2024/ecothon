@@ -9,14 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@geist-ui/icons": "^1.0.2",
+    "@pbe/react-yandex-maps": "^1.2.5",
+    "framer-motion": "^11.5.4",
+    "next": "14.2.12",
     "react": "^18",
+    "react-datepicker": "^7.3.0",
     "react-dom": "^18",
-    "next": "14.2.12"
+    "react-scrollbars-custom": "^4.1.1",
+    "react-voodoo": "^2.5.11",
+    "recharts": "^2.13.0-alpha.5"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react-dom": "^18",
+    "sass": "^1.79.1",
+    "typescript": "^5"
   }
 }
