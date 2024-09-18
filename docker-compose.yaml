@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      dockerfile: backend/Dockerfile
+    container_name: Ecothon_App
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/backend_data
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+    restart: unless-stopped
+    volumes:
+      - 'node_exporter_data:/host:ro,rslave'
+    ports:
+      - 9100:9100
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+volumes:
+  node_exporter_data:
+  db-data:
+  backend_data:
+    driver: local
+  grafana-storage: { }
