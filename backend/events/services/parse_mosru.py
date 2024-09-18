@@ -75,7 +75,8 @@ def parse_page(driver, query, page):
             lon, lat = get_coordinates(title)
 
             # Создаем объект события
-            event = Event(title=title, description=description, lon=lon, lat=lat, image=image, website=link)
+            event = Event(title=title, description=description, lon=lon, lat=lat, image=image, website=link, tags={},
+                          participants=0)
             events.append(event)
 
         except Exception as e:
