@@ -127,4 +127,4 @@ GOSUSLUGI_CLIENT_SECRET = '<ваш client_secret>'
 GOSUSLUGI_AUTHORIZATION_URL = 'https://esia.gosuslugi.ru/idp/oauth/oauth2/authorize'
 GOSUSLUGI_ACCESS_TOKEN_URL = 'https://esia.gosuslugi.ru/idp/oauth/oauth2/token'
 GOSUSLUGI_USERINFO_URL = 'https://esia.gosuslugi.ru/idp/rsa/sso/oauth2/userinfo'
-GOSUSLUGI_REDIRECT_URI = 'http://localhost:8000/auth/gosuslugi/callback/'  # Change for production
+GOSUSLUGI_REDIRECT_URI = 'http://localhost:8080/gosuslugi/callback/'  # Change for production

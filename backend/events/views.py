@@ -1,6 +1,7 @@
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from .models import Event
+from .models import Event, Member
 from django.utils import timezone
 
 
@@ -56,3 +57,21 @@ def get_events(request):
     events = Event.objects.all()
     events_json = [event.to_dict() for event in events]
     return JsonResponse(events_json, safe=False)
+
+
+@require_http_methods(["GET"])
+def get_event_members(request, event_id):
+    members = Member.objects.filter(event_id=event_id)
+    members_json = [member.to_dict() for member in members]
+    return JsonResponse(members_json, safe=False)
+
+
+@require_http_methods(["POST"])
+def add_member(request):
+    data = request.POST
+    user = User.objects.get(id=data.get('user_id'))
+    event = Event.objects.get(id=data.get('event_id'))
+    Member.objects.create(user=user, event=event)
+    event.participants += 1
+    event.save()
+    return JsonResponse({'status': 'success'}, status=201)

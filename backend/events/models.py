@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone  # Добавьте этот импорт
 
@@ -53,3 +54,9 @@ class Event(models.Model):
             'age_restriction': self.age_restriction,
             'website': self.website
         }
+
+
+class Member(models.Model):
+    id = models.IntegerField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
