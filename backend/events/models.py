@@ -1,11 +1,12 @@
 from django.db import models
 from django.utils import timezone  # Добавьте этот импорт
 
+
 class Event(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=255)
-    start_date = models.DateTimeField(default=timezone.now)
-    end_date = models.DateTimeField(default=timezone.now)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
     public_location = models.CharField(max_length=255)
     lon = models.FloatField()
     lat = models.FloatField()
