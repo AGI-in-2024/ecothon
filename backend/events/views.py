@@ -49,3 +49,10 @@ def add_event(request):
             'status': 'error',
             'message': str(e)
         }, status=400)
+
+
+@require_http_methods(["GET"])
+def get_events(request):
+    events = Event.objects.all()
+    events_json = [event.to_dict() for event in events]
+    return JsonResponse(events_json, safe=False)

@@ -1,3 +1,5 @@
+import logging
+
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
@@ -55,13 +57,17 @@ def parse_page(driver, query, page):
             description_element = card.find_element(By.TAG_NAME, "p")
             description = description_element.text.strip()
 
-            # Извлекаем дату события
+            # Извлекаем категорию и дату события
             date_element = card.find_element(By.TAG_NAME, "span")
-            date_text = date_element.text.split('·')[-1].strip()
+            date_text_parts = date_element.text.split(" · ")
+            category = date_text_parts[0].strip() if len(date_text_parts) > 0 else None
+            date_text = date_text_parts[1].strip() if len(date_text_parts) > 1 else None
+            logger = logging.getLogger(__name__)
+            logger.info(f"Категория: {category}, дата: {date_text}")
             try:
-                date = datetime.strptime(date_text, "%d %B %Y")
+                start_date = datetime.strptime(date_text, "%d %B %Y") if date_text else None
             except ValueError:
-                date = None
+                start_date = None
 
             # Извлекаем ссылку на событие
             link_element = card.find_element(By.TAG_NAME, "a")
@@ -75,8 +81,17 @@ def parse_page(driver, query, page):
             lon, lat = get_coordinates(title)
 
             # Создаем объект события
-            event = Event(title=title, description=description, lon=lon, lat=lat, image=image, website=link, tags={},
-                          participants=0)
+            event = Event(
+                title=title,
+                description=description,
+                lon=lon,
+                lat=lat,
+                image=image,
+                website=link,
+                tags={'category': category} if category else {},
+                start_date=start_date,
+                participants=0
+            )
             events.append(event)
 
         except Exception as e:
@@ -104,4 +119,6 @@ def parse_mosru_events():
 
     # Выводим все собранные события
     for event in all_events:
-        event.save()
+        find_event = Event.objects.filter(title=event.title).first()
+        if not find_event:
+            event.save()
