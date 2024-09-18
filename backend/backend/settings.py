@@ -122,3 +122,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+GOSUSLUGI_CLIENT_ID = '<ваш client_id>'
+GOSUSLUGI_CLIENT_SECRET = '<ваш client_secret>'
+GOSUSLUGI_AUTHORIZATION_URL = 'https://esia.gosuslugi.ru/idp/oauth/oauth2/authorize'
+GOSUSLUGI_ACCESS_TOKEN_URL = 'https://esia.gosuslugi.ru/idp/oauth/oauth2/token'
+GOSUSLUGI_USERINFO_URL = 'https://esia.gosuslugi.ru/idp/rsa/sso/oauth2/userinfo'
+GOSUSLUGI_REDIRECT_URI = 'http://localhost:8000/auth/gosuslugi/callback/'  # Change for production
