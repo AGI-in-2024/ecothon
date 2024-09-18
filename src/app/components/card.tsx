@@ -18,7 +18,7 @@ export const Card: React.FC<CardProps> = ({ children, style, onVote, id, ...prop
 
     const [constrained, setConstrained] = useState(true);
 
-    const [direction, setDirection] = useState();
+    const [direction, setDirection] = useState<any>();
 
     const [velocity, setVelocity] = useState<any>();
 
@@ -39,11 +39,12 @@ export const Card: React.FC<CardProps> = ({ children, style, onVote, id, ...prop
     };
 
     const getTrajectory = () => {
-        setVelocity(x.getVelocity());
+        if (x.getVelocity() !== 0)
+            setVelocity(x.getVelocity());
         setDirection(getDirection());
     };
 
-    const flyAway = (min: any) => {
+    const flyAway = (min: any, ignore_velocity?: boolean) => {
         const flyAwayDistance = (direction: any) => {
             const parentWidth = cardElem.current.parentNode.getBoundingClientRect()
                 .width;
@@ -52,8 +53,8 @@ export const Card: React.FC<CardProps> = ({ children, style, onVote, id, ...prop
                 ? -parentWidth / 2 - childWidth / 2
                 : parentWidth / 2 + childWidth / 2;
         };
-
-        if (direction && Math.abs(velocity) > min) {
+        console.log(direction)
+        if ((direction && Math.abs(velocity) > min) || (direction && ignore_velocity === true)) {
             setConstrained(false);
             controls.start({
                 x: flyAwayDistance(direction)
@@ -74,20 +75,27 @@ export const Card: React.FC<CardProps> = ({ children, style, onVote, id, ...prop
         return () => unsubscribeX();
     });
 
+    const skipCard = (direction: "left" | "right") => {
+        setDirection(direction);
+        flyAway(500, true);
+    };
+
     return (
-        <motion.div
-            className={styles['selection']}
-            animate={controls}
-            dragConstraints={constrained && { left: 0, right: 0, top: 0, bottom: 0 }}
-            dragElastic={1}
-            ref={cardElem}
-            style={{ x }}
-            onDrag={getTrajectory}
-            onDragEnd={() => flyAway(500)}
-            whileTap={{ scale: 1.1 }}
-            {...props}
-        >
-            {children}
-        </motion.div>
+        <>
+            <motion.div
+                className={styles['selection']}
+                animate={controls}
+                dragConstraints={constrained && { left: 0, right: 0, top: 0, bottom: 0 }}
+                dragElastic={0.2}
+                ref={cardElem}
+                style={{ x }}
+                onDrag={getTrajectory}
+                onDragEnd={() => flyAway(10, true)}
+                whileTap={{ scale: 1.1 }}
+                {...props}
+            >
+                {children}
+            </motion.div>
+        </>
     );
 };

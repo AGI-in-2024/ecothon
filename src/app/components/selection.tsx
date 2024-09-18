@@ -7,30 +7,29 @@ interface Card {
     id: number;
     image: string;
     title: string;
+    transform: string
 }
 
-const initialCards: Card[] = [
-    { id: 1, image: require('@/img/1.png'), title: 'Карточка 1' },
-    { id: 2, image: require('@/img/2.jpg'), title: 'Карточка 2' },
-    { id: 3, image: require('@/img/3.jpg'), title: 'Карточка 3' },
-];
-
 export const Selection: React.FC = () => {
-    const transform = (): any => {
-        let rotation = Math.random() * (5 - -5) + -5;
-        return `rotate(${rotation}deg)`;
-    }
+    const initialCards: Card[] = [
+        { id: 1, image: require('@/img/1.png'), title: '🧇', transform: '' },
+        { id: 2, image: require('@/img/2.jpg'), title: '🥞', transform: '' },
+        { id: 3, image: require('@/img/3.jpg'), title: '🍩', transform: '' },
+    ];
+
     return (
-        <Stack onVote={(item: any, vote) => console.log(item.props, vote)}>
-            <div className={styles['selection-item']} style={{ transform: transform }} data-value="waffles" whileTap={{ scale: 1.15 }}>
-                🧇
-            </div>
-            <div data-value="pancakes" whileTap={{ scale: 1.15 }}>
-                🥞
-            </div>
-            <div data-value="donuts" whileTap={{ scale: 1.15 }}>
-                🍩
-            </div>
-        </Stack>
+        <div className={styles['selection-container']}>
+            <Stack onVote={(item: any, vote) => console.log(item.props, vote)}>
+                {initialCards.map((card: Card) => {
+                    let rotation = Math.random() * (10 - -10) + -10;
+                    card.transform = `rotate(${rotation}deg)`
+                    return (
+                        <div className={styles['selection-item']} style={{ transform: card.transform }} data-value="waffles" >
+                            {card.title}
+                        </div>
+                    )
+                })}
+            </Stack>
+        </div>
     );
 };

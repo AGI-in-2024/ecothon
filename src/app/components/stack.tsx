@@ -38,6 +38,9 @@ export const Stack: React.FC<StackProps> = ({ onVote, children, ...props }) => {
             </Card>
           )
         })}
+        <div className={styles['selection-buttons']}>
+
+        </div>
       </div>
     </>
   )
