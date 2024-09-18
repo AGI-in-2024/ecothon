@@ -54,8 +54,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ onFilter }) => {
       <Input
         value={search}
         onChange={handleSearchChange}
-        placeholder="Search..."
-        icon={<Search color='#2E7D32' />}
+        placeholder="Поиск..."
+        icon={<Search color='#202221' />}
       />
       <Select
         list={categoryOptions}
@@ -67,12 +67,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ onFilter }) => {
         <DatePicker
           selected={dateFrom}
           onChange={handleDateFromChange}
-          placeholderText="From date"
+          placeholderText="Начало"
+          className="date-picker"
         />
         <DatePicker
           selected={dateTo}
           onChange={handleDateToChange}
-          placeholderText="To date"
+          placeholderText="Конец"
+          className="date-picker"
         />
       </div>
       <Tags tags={tags} onChange={handleTagsChange} />

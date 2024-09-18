@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Oswald, Montserrat } from 'next/font/google'
 import "@/styles/global.scss";
 import "@/styles/scrollbar.scss";
+import '@/styles/datepicker.scss'
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900 500 400",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900 500 400",
-});
+const monserrat = Montserrat({
+  subsets: ['cyrillic'],
+  display: 'swap',
+  weight: ['400', '500'],
+  variable: '--font-monserrat',
+})
+
+const oswald = Oswald({
+  subsets: ['cyrillic'],
+  display: 'swap',
+  weight: ['600', '700'],
+  variable: '--font-oswald',
+})
 
 export const metadata: Metadata = {
   title: "Экологический мероприятия в Москве",
@@ -25,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${oswald.variable} ${monserrat.variable}`}>
         {children}
       </body>
     </html>

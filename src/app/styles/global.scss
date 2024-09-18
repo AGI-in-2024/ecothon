@@ -1,14 +1,13 @@
 :root {
-  --primary-color: #4CAF50;
+  --primary-color: #05976A;
   /* Основной цвет */
-  --secondary-color: #8B4513;
+  --secondary-color: #D3F5E4;
   /* Второстепенный цвет */
-  --text-color: #2E7D32;
+  --text-color: #FEFEFE;
   /* Цвет текста */
-  --background-color: #E8F5E9;
-  /* Фон */
-  --accent-color: #66BB6A;
+  --accent-color: #8C0000;
   /* Акцентный цвет */
+  --black-color: #202221;
 }
 
 html,
@@ -23,6 +22,12 @@ body {
   margin: 0;
   font-weight: 400;
   font-size: 16px;
+  font-family: var(--font-monserrat);
+  color: var(--black-color);
+}
+
+path {
+  color: inherit;
 }
 
 a {
@@ -36,4 +41,9 @@ button {
   border: 0;
   outline: none;
   max-width: 100%;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
 }

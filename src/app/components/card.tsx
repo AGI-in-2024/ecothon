@@ -8,9 +8,10 @@ interface CardProps {
     style?: React.CSSProperties;
     onVote: (vote: boolean) => void;
     id: string;
+    choose?: any;
 }
 
-export const Card: React.FC<CardProps> = ({ children, style, onVote, id, ...props }) => {
+export const Card: React.FC<CardProps> = ({ children, style, onVote, id, choose, ...props }) => {
     const cardElem = useRef<any>(null);
 
     const x = useMotionValue(0);
@@ -21,6 +22,7 @@ export const Card: React.FC<CardProps> = ({ children, style, onVote, id, ...prop
     const [direction, setDirection] = useState<any>();
 
     const [velocity, setVelocity] = useState<any>();
+
 
     const getVote = (childNode: any, parentNode: any) => {
         const childRect = childNode.getBoundingClientRect();
@@ -44,7 +46,7 @@ export const Card: React.FC<CardProps> = ({ children, style, onVote, id, ...prop
         setDirection(getDirection());
     };
 
-    const flyAway = (min: any, ignore_velocity?: boolean) => {
+    const flyAway = (min: any, ignore_velocity?: boolean, directionInit?: string) => {
         const flyAwayDistance = (direction: any) => {
             const parentWidth = cardElem.current.parentNode.getBoundingClientRect()
                 .width;
@@ -53,11 +55,11 @@ export const Card: React.FC<CardProps> = ({ children, style, onVote, id, ...prop
                 ? -parentWidth / 2 - childWidth / 2
                 : parentWidth / 2 + childWidth / 2;
         };
-        console.log(direction)
-        if ((direction && Math.abs(velocity) > min) || (direction && ignore_velocity === true)) {
+        const directionMain = (direction === undefined) ? directionInit : direction;
+        if ((directionMain && Math.abs(velocity) > min) || (directionMain && ignore_velocity === true)) {
             setConstrained(false);
             controls.start({
-                x: flyAwayDistance(direction)
+                x: flyAwayDistance(directionMain)
             });
         }
     };
@@ -75,10 +77,12 @@ export const Card: React.FC<CardProps> = ({ children, style, onVote, id, ...prop
         return () => unsubscribeX();
     });
 
-    const skipCard = (direction: "left" | "right") => {
-        setDirection(direction);
-        flyAway(500, true);
-    };
+    useEffect(() => {
+        if (choose) {
+            flyAway(10, true, choose);
+        }
+    }, [choose]);
+
 
     return (
         <>

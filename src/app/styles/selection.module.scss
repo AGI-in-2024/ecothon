@@ -13,15 +13,27 @@
 
 .selection-item {
     background: #f9fafb;
-    width: 200px;
-    height: 250px;
+    width: 400px;
+    height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 80px;
+    font-size: 16px;
     text-shadow: 0 10px 10px #d1d5db;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
+    flex-direction: column;
+    gap: 7px;
+
+    &__img {
+        width: 350px;
+        height: 250px;
+
+        img {
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    }
 }
 
 .selection-container {
@@ -32,4 +44,38 @@
     align-content: center;
     height: 100vh;
     width: 100vw;
+}
+
+.selection-buttons {
+    margin-top: 560px;
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+
+    .selection-reject,
+    .selection-accept {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .selection-reject {
+        background-color: rgba(255, 0, 0, 0.3);
+        box-shadow: 0 2px 5px rgba(255, 0, 0, 0.5);
+    }
+
+    .selection-accept {
+        background-color: rgba(0, 255, 0, 0.3);
+        box-shadow: 0 2px 5px rgba(0, 255, 0, 0.5);
+    }
+}
+
+.selection-page {
+    background-image: url("../img/background.svg");
+    background-repeat: repeat;
+    background-size: 30%;
 }

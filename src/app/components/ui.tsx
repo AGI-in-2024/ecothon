@@ -235,9 +235,9 @@ export const Tags: React.FC<TagsProps> = ({ tags, onChange }) => {
         value={tagInput}
         onChange={(e) => setTagInput(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && handleAddTag()}
-        placeholder="Add a tag"
+        placeholder="Добавить тег"
       />
-      <button onClick={handleAddTag}>Add</button>
+      <button onClick={handleAddTag}>Добавить</button>
     </div>
   );
 };

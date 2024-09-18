@@ -2,6 +2,7 @@
 import React from 'react';
 import { Stack } from "./stack";
 import styles from "@/styles/selection.module.scss"
+import Image from 'next/image';
 
 interface Card {
     id: number;
@@ -12,9 +13,9 @@ interface Card {
 
 export const Selection: React.FC = () => {
     const initialCards: Card[] = [
-        { id: 1, image: require('@/img/1.png'), title: '🧇', transform: '' },
-        { id: 2, image: require('@/img/2.jpg'), title: '🥞', transform: '' },
-        { id: 3, image: require('@/img/3.jpg'), title: '🍩', transform: '' },
+        { id: 1, image: require('@/img/1.jpg'), title: 'Зеленая Москва: Экологический Фестиваль', transform: '' },
+        { id: 2, image: require('@/img/2.jpg'), title: 'Эко-Уикенд: Чистый Город', transform: '' },
+        { id: 3, image: require('@/img/3.jpg'), title: 'Сохраним Природу: Эко-Конференция', transform: '' },
     ];
 
     return (
@@ -25,6 +26,9 @@ export const Selection: React.FC = () => {
                     card.transform = `rotate(${rotation}deg)`
                     return (
                         <div className={styles['selection-item']} style={{ transform: card.transform }} data-value="waffles" >
+                            <div className={styles['selection-item__img']}>
+                                <Image src={card.image} alt='' />
+                            </div>
                             {card.title}
                         </div>
                     )
