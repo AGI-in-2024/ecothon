@@ -3,6 +3,11 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from .models import Event, Member
 from django.utils import timezone
+from prometheus_client import Counter
+
+
+new_event_counter = Counter('new_event_counter', 'Counter of new events')
+add_member_counter = Counter('add_member_counter', 'Counter of added members')
 
 
 @require_http_methods(["POST"])
@@ -37,6 +42,7 @@ def add_event(request):
             website=data.get('website')
         )
 
+        new_event_counter.inc()
         # Возвращаем успешный ответ
         return JsonResponse({
             'status': 'success',
@@ -74,4 +80,5 @@ def add_member(request):
     Member.objects.create(user=user, event=event)
     event.participants += 1
     event.save()
+    add_member_counter.inc()
     return JsonResponse({'status': 'success'}, status=201)
