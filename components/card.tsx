@@ -7,6 +7,7 @@ interface CardProps {
     children: ReactNode;
     style?: React.CSSProperties;
     onVote: (vote: boolean) => void;
+    drag: any;
     id?: string;
     choose?: any;
 }

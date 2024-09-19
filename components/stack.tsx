@@ -33,6 +33,7 @@ export const Stack: React.FC<StackProps> = ({ onVote, children, ...props }) => {
           let isTop = index === stack.length - 1
           return (
             <Card
+              drag={isTop}
               choose={(isTop) ? choose : undefined}
               key={(item.key || index) + item.choose}
               onVote={(result: any) => handleVote(item, result)}
