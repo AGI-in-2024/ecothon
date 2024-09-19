@@ -1,0 +1,23 @@
+.ScrollbarsCustom-Track.ScrollbarsCustom-TrackY {
+    height: 100% !important;
+    top: 0 !important;
+    width: 8px !important;
+}
+
+.ScrollbarsCustom-TrackX.ScrollbarsCustom-Track {
+    height: 8px !important;
+}
+
+.ScrollbarsCustom-Thumb {
+    background-color: var(--primary-color) !important;
+}
+
+.ScrollbarsCustom-Wrapper {
+    border-radius: 8px !important;
+}
+
+.trackYVisible {
+    .ScrollbarsCustom-Wrapper {
+        inset: 0px 8px 0px 0px !important;
+    }
+}

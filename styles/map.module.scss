@@ -1,0 +1,16 @@
+.mapContainer {
+    display: flex;
+
+    .content {
+        width: calc(100% - 380px);
+    }
+
+    .button-group {
+        position: absolute;
+        left: 395px;
+        z-index: 999;
+        display: flex;
+        gap: 10px;
+        top: 10px;
+    }
+}

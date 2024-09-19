@@ -1,0 +1,22 @@
+.sidebar {
+    padding: 16px 8px;
+    width: 380px;
+    background-color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .date-input {
+        display: flex;
+        gap: 10px;
+
+        &>* {
+            width: calc(50% - 5px);
+        }
+    }
+}
+
+.datePicker {
+    display: flex;
+    gap: 10px;
+}

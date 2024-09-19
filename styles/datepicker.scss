@@ -1,0 +1,18 @@
+@use "./ui.module.scss" as i;
+
+.date-picker {
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 10px 8px;
+    height: 38px;
+}
+
+.react-datepicker__day--selected {
+    background-color: var(--accent-color) !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+    background-color: rgba($color: (
+            var(--accent-color)),
+        $alpha: 0) !important;
+    }
