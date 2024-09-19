@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Leaf, Calendar, MapPin, Users, Clock, TreeDeciduous } from "lucide-react"
 
 export function EcoRibbonPage() {
-  const [selectedEvent, setSelectedEvent] = useState(null)
+  const [selectedEvent, setSelectedEvent] = useState<any>(null)
   const [registrationOpen, setRegistrationOpen] = useState(false)
 
   const events = [
@@ -48,7 +48,7 @@ export function EcoRibbonPage() {
     },
   ]
 
-  const handleEventClick = (event) => {
+  const handleEventClick = (event : any) => {
     setSelectedEvent(event)
     setRegistrationOpen(false)
   }

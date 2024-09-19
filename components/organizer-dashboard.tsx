@@ -147,13 +147,14 @@ export function OrganizerDashboard() {
     tags: [],
     price: '',
     ageRestriction: '',
-    website: '',
+    website: ''
   })
 
   const handleCreateEvent = () => {
-    const createdEvent: Event = {
+    const { id, ...eventData } = newEvent; // Удаляем id
+    const createdEvent: any = {
       id: events.length + 1,
-      ...newEvent as Event,
+      ...eventData, // Используем eventData вместо newEvent
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }
@@ -179,7 +180,7 @@ export function OrganizerDashboard() {
   return (
     <div className="container mx-auto p-6 bg-gradient-to-br from-teal-50 to-emerald-100 min-h-screen">
       <h1 className="text-4xl font-bold mb-8 text-emerald-800 text-center">Личный кабинет организатора</h1>
-      
+
       <Tabs defaultValue="dashboard" className="space-y-6">
         <TabsList className="mb-6 bg-emerald-100 p-1 rounded-lg">
           <TabsTrigger value="dashboard" className="data-[state=active]:bg-emerald-600 data-[state=active]:text-white">Панель управления</TabsTrigger>
@@ -187,7 +188,7 @@ export function OrganizerDashboard() {
           <TabsTrigger value="statistics" className="data-[state=active]:bg-emerald-600 data-[state=active]:text-white">Статистика</TabsTrigger>
           <TabsTrigger value="profile" className="data-[state=active]:bg-emerald-600 data-[state=active]:text-white">Профиль</TabsTrigger>
         </TabsList>
-        
+
         <TabsContent value="dashboard">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="bg-white shadow-lg">
@@ -205,7 +206,7 @@ export function OrganizerDashboard() {
                 </ScrollArea>
               </CardContent>
             </Card>
-            
+
             <Card className="bg-white shadow-lg">
               <CardHeader className="bg-emerald-600 text-white rounded-t-lg">
                 <CardTitle>Календарь</CardTitle>
@@ -221,7 +222,7 @@ export function OrganizerDashboard() {
             </Card>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="events">
           <Card className="bg-white shadow-lg">
             <CardHeader className="bg-emerald-600 text-white rounded-t-lg">
@@ -423,7 +424,7 @@ export function OrganizerDashboard() {
             </CardContent>
           </Card>
         </TabsContent>
-        
+
         <TabsContent value="statistics">
           <Card className="bg-white shadow-lg">
             <CardHeader className="bg-emerald-600 text-white rounded-t-lg">
@@ -463,7 +464,7 @@ export function OrganizerDashboard() {
             </CardContent>
           </Card>
         </TabsContent>
-        
+
         <TabsContent value="profile">
           <Card className="bg-white shadow-lg">
             <CardHeader className="bg-emerald-600 text-white rounded-t-lg">

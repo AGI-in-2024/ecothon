@@ -205,7 +205,6 @@ export function EcoEventMap() {
                 <Select
                   value={filters.type}
                   onValueChange={(value) => setFilters({...filters, type: value})}
-                  className="bg-white"
                 >
                   <option value="">Все типы</option>
                   <option value="посадка">Посадка деревьев</option>
@@ -255,7 +254,7 @@ export function EcoEventMap() {
               width="100%"
               height="100%"
             >
-              <ZoomControl options={{ float: 'right' }} />
+              <ZoomControl ptions={{ position: { right: 10, top: 10 } }} />
               <SearchControl options={{ float: 'left' }} />
               {events.map((event) => (
                 <Placemark

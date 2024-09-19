@@ -29,7 +29,7 @@ const upcomingEvents = [
   { id: 3, title: 'Фестиваль эко-фильмов', date: '2023-07-10', participants: 1000 },
 ]
 
-function ContentCard({ item }) {
+function ContentCard({ item } : any) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
@@ -67,7 +67,7 @@ function ContentCard({ item }) {
   )
 }
 
-function StatCard({ icon, title, value }) {
+function StatCard({ icon, title, value } : any) {
   return (
     <div className="bg-white p-4 rounded-lg shadow-md text-center">
       {icon}
@@ -77,7 +77,7 @@ function StatCard({ icon, title, value }) {
   )
 }
 
-function EventCard({ event }) {
+function EventCard({ event } : any) {
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <h3 className="text-lg font-semibold text-green-700">{event.title}</h3>

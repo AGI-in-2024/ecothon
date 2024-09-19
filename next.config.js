@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  // Add any other necessary configurations
+  root: true,
+  parserOptions: {
+    ecmaVersion: 9
+  },
+  rules: {}
 }
 
 module.exports = nextConfig

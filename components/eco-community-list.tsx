@@ -123,7 +123,7 @@ export function EcoCommunityListComponent() {
   )
 }
 
-function CommunityCard({ community }) {
+function CommunityCard({ community } : any) {
   return (
     <Card className="bg-white">
       <CardHeader className="flex flex-row items-center space-x-4 pb-2">

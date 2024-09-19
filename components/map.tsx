@@ -65,7 +65,7 @@ export const YandexMap: React.FC = () => {
                   iconImageOffset: [-15, -15]
                 }} />
             ))}
-            <ZoomControl options={{ float: "right" }} />
+            <ZoomControl options={{ position: { right: 10, top: 10 } }} />
           </Map>
         </YMaps>
       </div>
