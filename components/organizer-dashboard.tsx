@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import config from '../config'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -150,7 +151,7 @@ export function OrganizerDashboard() {
     website: ''
   })
 
-  const handleCreateEvent = () => {
+  const handleCreateEvent = async () => {
     const { id, ...eventData } = newEvent; // Удаляем id
     const createdEvent: any = {
       id: events.length + 1,
@@ -158,9 +159,36 @@ export function OrganizerDashboard() {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }
+
     setEvents([...events, createdEvent])
-    setIsCreateEventDialogOpen(false)
-    setNewEvent({})
+
+    try {
+      const eventBody = createdEvent
+      eventBody.start_date = eventBody.startDate
+      eventBody.end_date = eventBody.endDate
+      eventBody.public_location = eventBody.publicLocation
+      eventBody.event_type = eventBody.type
+      eventBody.age_restriction = eventBody.ageRestriction
+
+      const response = await fetch(`${config.Host_url}/events/add/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(eventBody),
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при создании мероприятия');
+      }
+
+      const data = await response.json();
+      setIsCreateEventDialogOpen(false);
+      setNewEvent({});
+    } catch (error) {
+      console.error(error);
+      // Обработка ошибок
+    }
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

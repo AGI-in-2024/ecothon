@@ -113,6 +113,14 @@ export function EcoEnlightenmentComponent() {
                       </DropdownMenuItem>
                     </Link>
                   )}
+                  {userRole === 'user' && (
+                    <Link href={`/lk-user`}>
+                      <DropdownMenuItem>
+                        <UserIcon className="mr-2 h-4 w-4" />
+                        <span>Личный кабинет</span>
+                      </DropdownMenuItem>
+                    </Link>
+                  )}
                   {userRole === 'admin' && (
                     <Link href={`/admin`}>
                       <DropdownMenuItem>

@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import config from '../config'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -12,15 +13,18 @@ export function EcoRibbonPage() {
   const [selectedEvent, setSelectedEvent] = useState<any>(null)
   const [registrationOpen, setRegistrationOpen] = useState(false)
 
-  const events = [
+  const [events, setEvents] = useState<any>([])
+
+
+  const mockEvents = [
     {
       id: 1,
       title: "Городская уборка",
       description: "Присоединяйтесь к нам для уборки городского парка и помогите сделать наш город чище!",
-      date: "15 мая 2023",
+      start_date: "15 мая 2023",
       time: "10:00 - 14:00",
-      location: "Центральный парк",
-      attendees: 50,
+      public_location: "Центральный парк",
+      members: [1, 2, 7, 8, 8],
       organizer: "ЭкоГород",
       impact: "Очистка 5 км² территории",
     },
@@ -28,10 +32,10 @@ export function EcoRibbonPage() {
       id: 2,
       title: "Эко-лекция: Переработка отходов",
       description: "Узнайте о важности переработки отходов и как правильно сортировать мусор в домашних условиях.",
-      date: "22 мая 2023",
+      start_date: "22 мая 2023",
       time: "18:30 - 20:00",
-      location: "Городская библиотека",
-      attendees: 30,
+      public_location: "Городская библиотека",
+      members: [1, 2],
       organizer: "ЭкоПросвещение",
       impact: "Образование 100+ горожан",
     },
@@ -39,16 +43,38 @@ export function EcoRibbonPage() {
       id: 3,
       title: "Посадка деревьев",
       description: "Помогите нам озеленить наш город, посадив новые деревья в парке 'Зеленая роща'.",
-      date: "5 июня 2023",
+      start_date: "5 июня 2023",
       time: "09:00 - 13:00",
-      location: "Парк 'Зеленая роща'",
-      attendees: 100,
+      public_location: "Парк 'Зеленая роща'",
+      members: [1, 2, 3, 4],
       organizer: "Зеленый Город",
       impact: "Посадка 200 новых деревьев",
     },
   ]
 
-  const handleEventClick = (event : any) => {
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch(`${config.Host_url}/events/`)
+        if (!response.ok) {
+          throw new Error('Ошибка при получении данных')
+        }
+        const data = await response.json()
+        if (data[0] !== undefined)
+          setEvents(data)
+        else
+          setEvents(mockEvents)
+      } catch (error) {
+        console.error('Ошибка:', error)
+        setEvents(mockEvents)
+      }
+    }
+
+    fetchEvents()
+  }, [])
+
+  const handleEventClick = (event: any) => {
     setSelectedEvent(event)
     setRegistrationOpen(false)
   }
@@ -76,7 +102,7 @@ export function EcoRibbonPage() {
           <section>
             <h2 className="text-2xl font-bold text-green-800 mb-4">Предстоящие события</h2>
             <div className="space-y-4">
-              {events.map((event) => (
+              {events.map((event: any) => (
                 <Card key={event.id} className="bg-white border-green-200 cursor-pointer hover:shadow-md transition-shadow" onClick={() => handleEventClick(event)}>
                   <CardHeader>
                     <CardTitle className="text-green-700">{event.title}</CardTitle>
@@ -86,15 +112,15 @@ export function EcoRibbonPage() {
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="secondary" className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
-                        {event.date}
+                        {event.start_date}
                       </Badge>
                       <Badge variant="secondary" className="flex items-center gap-1">
                         <MapPin className="w-3 h-3" />
-                        {event.location}
+                        {event.public_location}
                       </Badge>
                       <Badge variant="secondary" className="flex items-center gap-1">
                         <Users className="w-3 h-3" />
-                        {event.attendees} участников
+                        {event.members.length} участников
                       </Badge>
                     </div>
                   </CardContent>
