@@ -9,7 +9,6 @@ import { Calendar } from "@/components/ui/calendar"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
-import Link from 'next/link'
 import { MapPinIcon, CalendarIcon, UsersIcon, LeafIcon, SearchIcon, TrendingUpIcon, BookOpenIcon, RecycleIcon, BirdIcon, MenuIcon, DownloadIcon, LogInIcon, LogOutIcon, UserIcon, SettingsIcon } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
@@ -81,45 +80,25 @@ export function EcoEnlightenmentComponent() {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <UserIcon className="mr-2 h-4 w-4" />
+                    <span>Профиль</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <SettingsIcon className="mr-2 h-4 w-4" />
+                    <span>Настройки</span>
+                  </DropdownMenuItem>
                   {userRole === 'organizer' && (
-                    <Link href={`/orginizer`}>
-                      <DropdownMenuItem>
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        <span>Мои мероприятия</span>
-                      </DropdownMenuItem>
-                    </Link>
-                  )}
-                  {userRole === 'user' && (
-                    <Link href={`/map`}>
-                      <DropdownMenuItem>
-                        <MapPinIcon className="mr-2 h-4 w-4" />
-                        <span>Карта</span>
-                      </DropdownMenuItem>
-                    </Link>
-                  )}
-                  {userRole === 'user' && (
-                    <Link href={`/selection`}>
-                      <DropdownMenuItem>
-                        <TrendingUpIcon className="mr-2 h-4 w-4" />
-                        <span>Подбор</span>
-                      </DropdownMenuItem>
-                    </Link>
-                  )}
-                  {userRole === 'user' && (
-                    <Link href={`/favourite`}>
-                      <DropdownMenuItem>
-                        <UserIcon className="mr-2 h-4 w-4" />
-                        <span>Избранное</span>
-                      </DropdownMenuItem>
-                    </Link>
+                    <DropdownMenuItem>
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      <span>Мои мероприятия</span>
+                    </DropdownMenuItem>
                   )}
                   {userRole === 'admin' && (
-                    <Link href={`/admin`}>
-                      <DropdownMenuItem>
-                        <SettingsIcon className="mr-2 h-4 w-4" />
-                        <span>Панель администратора</span>
-                      </DropdownMenuItem>
-                    </Link>
+                    <DropdownMenuItem>
+                      <SettingsIcon className="mr-2 h-4 w-4" />
+                      <span>Панель администратора</span>
+                    </DropdownMenuItem>
                   )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout}>
@@ -207,8 +186,8 @@ export function EcoEnlightenmentComponent() {
           <Card className="bg-white shadow-xl">
             <CardContent className="p-6">
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <Input
-                  placeholder="Поиск событий..."
+                <Input 
+                  placeholder="Поиск событий..." 
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="flex-grow text-lg"
@@ -227,6 +206,34 @@ export function EcoEnlightenmentComponent() {
                   </SelectContent>
                 </Select>
                 <Button className="bg-emerald-600 hover:bg-emerald-700 w-full sm:w-auto"><SearchIcon className="mr-2" /> Найти</Button>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section id="about" className="mb-16">
+          <h2 className="text-4xl font-bold mb-6 text-emerald-800">О нас</h2>
+          <Card className="bg-white shadow-xl">
+            <CardContent className="p-6">
+            </CardContent>
+          </Card>
+        </section>
+
+        <section id="events" className="mb-16">
+          <h2 className="text-4xl font-bold mb-6 text-emerald-800">Предстоящие события</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          </div>
+        </section>
+
+        <section id="map"  className="mb-16">
+          <h2 className="text-4xl font-bold mb-6 text-emerald-800">Карта событий</h2>
+          <Card className="bg-white shadow-xl">
+            <CardContent className="p-4">
+              <div className="aspect-video relative">
+                {/* Replace with actual map component */}
+                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+                  <p className="text-gray-500">Здесь будет интерактивная карта событий</p>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -297,9 +304,6 @@ export function EcoEnlightenmentComponent() {
               </CardContent>
             </Card>
           </div>
-          <Link href={`/community`}>
-            <Button variant="outline" className="mt-5 border-emerald-600 text-emerald-600 hover:bg-emerald-50">Перейти</Button>
-          </Link>
         </section>
 
         <section id="trending" className="mb-16">
@@ -339,28 +343,25 @@ export function EcoEnlightenmentComponent() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Link href={`/knowledge`}>
-                  <Button variant="outline" className="w-full border-emerald-600 text-emerald-600 hover:bg-emerald-50">Смотреть все</Button>
-                </Link>
+                <Button variant="outline" className="w-full border-emerald-600 text-emerald-600 hover:bg-emerald-50">Смотреть все</Button>
               </CardFooter>
             </Card>
             <Card className="bg-white shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center text-2xl font-semibold text-emerald-700">
                   <UsersIcon className="mr-2 h-6 w-6" />
-                  Эко лента
+                  Для организаторов
                 </CardTitle>
               </CardHeader>
               <CardContent>
-
-                <p>
-                  Присоединяйтесь к экологическим мероприятиям в вашем городе. Вместе мы можем сделать наш мир чище и зеленее!
-                </p>
+                <ul className="list-disc list-inside text-gray-700 space-y-2">
+                  <li>Как организовать эко-мероприятие</li>
+                  <li>Правила подачи заявки на проведение события</li>
+                  <li>Рекомендации по продвижению эко-инициатив</li>
+                </ul>
               </CardContent>
               <CardFooter>
-                <Link href={`/ribbon`}>
-                  <Button variant="outline" className="w-full border-emerald-600 text-emerald-600 hover:bg-emerald-50">Подробнее</Button>
-                </Link>
+                <Button variant="outline" className="w-full border-emerald-600 text-emerald-600 hover:bg-emerald-50">Подробнее</Button>
               </CardFooter>
             </Card>
           </div>
@@ -368,7 +369,7 @@ export function EcoEnlightenmentComponent() {
 
         {isLoggedIn && userRole === 'admin' && (
           <section id="admin-panel" className="mb-16">
-            <Button
+            <Button 
               className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
               onClick={handleAdminPanelOpen}
             >
